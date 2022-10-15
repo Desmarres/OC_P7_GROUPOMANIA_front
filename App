@@ -1,0 +1,27 @@
+App
+- user
+
+ConnectForm
+- error
+- loading
+- < onConnect
+
+App
+- page
+- posts
+- currentPost
+
+Posts
+- > posts
+- < onDelete(post)
+
+PostsDetail
+- > id
+- > post
+
+PostEditForm
+- > post
+- < onSubmit(post, newPost)
+
+PostCreateForm
+- < onSubmit(newPost)
