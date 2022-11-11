@@ -3,9 +3,11 @@ import { Loader } from "../components/Loader";
 import { usePost } from "../hooks/post";
 import { PostList } from "../components/Post";
 import { CreatedPost } from "../components/PostForm";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 export function Site() {
+
+    const user = useLoaderData();
 
     const {
         posts,
@@ -16,7 +18,8 @@ export function Site() {
     } = usePost();
 
     useEffect(function () {
-        fetchPosts()
+        //window.setInterval(() => { fetchPosts() }, 10000)
+        fetchPosts();
     }, [fetchPosts])
 
     const navigate = useNavigate();
@@ -38,6 +41,7 @@ export function Site() {
         {posts === null ?
             <Loader /> :
             <PostList
+                user={user}
                 posts={posts}
                 onDelete={deletePost}
                 onUpdate={updatePost}

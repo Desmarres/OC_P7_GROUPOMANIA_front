@@ -42,33 +42,37 @@ export function usePost() {
             dispatch({ type: 'DELETE_POSTS', payload: post })
         },
         createPost: async function (dataForm) {
-            let contentType = "application/json";
-            let data = dataForm;
-            if (dataForm.get('image').name === "") {
-                data = JSON.stringify({ text: dataForm.get('text') });
+            let data = true;
+            if (dataForm.get("image").name === "") {
+                dataForm = JSON.stringify({ text: dataForm.get("text") });
+                data = false;
             } else {
-                contentType = "multipart/form-data; boundary=----WebKitFormBoundaryUkTYrNfqvPJJXAie";
+                dataForm.append("post", JSON.stringify({ text: dataForm.get('text') }))
+                dataForm.delete("text");
             }
-            const res = await apiFetch('/post/', {
+
+            const res = await apiFetch("/post/", {
                 method: "POST",
-                body: data
-            }, contentType)
-            dispatch({ type: 'ADD_POSTS', payload: res.post })
+                body: dataForm
+            }, data)
+            dispatch({ type: "ADD_POSTS", payload: res.post })
         },
         updatePost: async function (post, dataForm) {
-            let contentType = "application/json";
-            let data = dataForm;
-            if (dataForm.get('image').name === "") {
-                data = JSON.stringify({ text: dataForm.get('text') });
+            let data = true;
+            if (dataForm.get("image").name === "") {
+                dataForm = JSON.stringify({ text: dataForm.get("text") });
+                data = false;
             } else {
-                contentType = "multipart/form-data; boundary=----WebKitFormBoundaryUkTYrNfqvPJJXAie";
+                dataForm.append("post", JSON.stringify({ text: dataForm.get('text') }))
+                dataForm.delete("text");
             }
+
             const res = await apiFetch('/post/' + post.id, {
                 method: "PUT",
-                body: data
-            }, contentType)
+                body: dataForm
+            }, data)
 
-            dispatch({ type: 'UPDATE_POSTS', payload: res.post })
+            dispatch({ type: "UPDATE_POSTS", payload: res.post })
         }
     }
 }

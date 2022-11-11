@@ -5,20 +5,25 @@ import PropTypes from "prop-types";
 
 export async function loaderAuth() {
 
-    let connected = "false";
+    let user = {};
 
     await apiFetch("/auth/")
-        .then(res => connected = res)
-        .catch(() => connected = "false");
+        .then(res => user.connected = res)
+        .catch(() => user.connected = "false");
 
-    return connected;
+    if (user.connected === "true") {
+        await apiFetch("/post/me")
+            .then(res => user = { ...user, ...res });
+    }
+
+    return user;
 }
 
 export function Auth({ children }) {
 
-    const connected = useLoaderData();
+    const user = useLoaderData();
 
-    if (connected === "false") {
+    if (user.connected === "false") {
         return <Navigate to="/login/" replace />;
     }
     return children;

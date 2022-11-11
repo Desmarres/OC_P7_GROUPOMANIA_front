@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { EditPost } from "./PostForm";
 
 
-export function PostList({ posts, onDelete, onUpdate }) {
+export function PostList({ user, posts, onDelete, onUpdate }) {
     return <ul>
         {posts.map(post =>
             <Post
                 key={post.id}
+                user={user}
                 post={post}
                 onDelete={onDelete}
                 onUpdate={onUpdate}
@@ -15,7 +16,7 @@ export function PostList({ posts, onDelete, onUpdate }) {
     </ul>
 }
 
-function Post({ post, onDelete, onUpdate }) {
+function Post({ user, post, onDelete, onUpdate }) {
     const navigate = useNavigate();
     const [edit, setEdit] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -41,6 +42,7 @@ function Post({ post, onDelete, onUpdate }) {
         <h4> Users {post.UserId} </h4>
         {(edit === false) ?
             <DisplayPost
+                user={user}
                 post={post}
                 handleDelete={handleDelete}
                 loading={loading}
@@ -54,11 +56,16 @@ function Post({ post, onDelete, onUpdate }) {
     </div>
 }
 
-function DisplayPost({ post, handleDelete, setEdit, loading }) {
+function DisplayPost({ user, post, handleDelete, setEdit, loading }) {
     return <>
         {(post.text) && <div>{post.text}</div>}
         {(post.imgUrl !== null) && <img src={post.imgUrl} alt={post.imgUrl} />}
-        <button onClick={() => setEdit(true)} disabled={loading} >Editer</button>
-        <button onClick={handleDelete} disabled={loading} >Supprimer</button>
+        {
+            ((post.UserId === user.userId) || (user.adminAcess === true)) &&
+            <>
+                <button onClick={() => setEdit(true)} disabled={loading} >Editer</button>
+                <button onClick={handleDelete} disabled={loading} >Supprimer</button>
+            </>
+        }
     </>
 }

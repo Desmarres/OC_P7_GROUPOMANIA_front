@@ -14,11 +14,11 @@ export class ApiErrors {
  * @param {object} options 
  */
 
-export async function apiFetch(endpoint, options = {}, contenttype = 'application/json') {
-    const headers = new Headers({
-        'Accept': 'application/json',
-        'Content-Type': contenttype
-    });
+export async function apiFetch(endpoint, options = {}, data = false) {
+    const headers = new Headers();
+    if (data === false) {
+        headers.append('Content-Type', 'application/json')
+    }
     if (localStorage.tokens) {
         headers.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('tokens')));
     }
