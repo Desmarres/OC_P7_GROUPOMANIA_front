@@ -1,0 +1,11 @@
+.btn {
+    border: none;
+    cursor: $cursor;
+    border-radius: $border-radius-btn;
+    background-color: $colour-primary;
+    color: $colour-secondary;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px;
+    @include flex(0, center, center, 0);
+}

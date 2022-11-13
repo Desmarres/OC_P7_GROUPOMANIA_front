@@ -10,6 +10,7 @@ import ErrorPage from "./page/ErrorPage";
 import { Site } from "./page/Site";
 import { Main } from "./Main";
 import { Auth, loaderAuth } from "./components/Auth";
+import './css/main.css';
 
 const router = createBrowserRouter([
   {

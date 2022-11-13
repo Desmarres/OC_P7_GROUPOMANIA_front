@@ -3,11 +3,10 @@ import { Loader } from "../components/Loader";
 import { usePost } from "../hooks/post";
 import { PostList } from "../components/Post";
 import { CreatedPost } from "../components/PostForm";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ReplySVG } from "../components/Icon";
 
 export function Site() {
-
-    const user = useLoaderData();
 
     const {
         posts,
@@ -36,12 +35,10 @@ export function Site() {
         navigate("/site/");
     }
     return <>
-        <h2>SITE</h2>
-        {newPost === false ? <button onClick={() => setNewPost(true)} >Nouveau Post</button> : <CreatedPost handleCreated={handleCreated} loading={loading} />}
+        {newPost === false ? <button className="btn" onClick={() => setNewPost(true)} ><ReplySVG /> Nouveau message </button> : <CreatedPost handleCreated={handleCreated} loading={loading} />}
         {posts === null ?
             <Loader /> :
             <PostList
-                user={user}
                 posts={posts}
                 onDelete={deletePost}
                 onUpdate={updatePost}

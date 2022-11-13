@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { DeleteSVG, EditSVG } from "./Icon";
 import { EditPost } from "./PostForm";
 
 
-export function PostList({ user, posts, onDelete, onUpdate }) {
+export function PostList({ posts, onDelete, onUpdate }) {
+
+    const { user, users } = useLoaderData();
+
     return <ul>
         {posts.map(post =>
             <Post
-                key={post.id}
                 user={user}
+                users={users}
+                key={post.id}
                 post={post}
                 onDelete={onDelete}
                 onUpdate={onUpdate}
@@ -16,7 +21,8 @@ export function PostList({ user, posts, onDelete, onUpdate }) {
     </ul>
 }
 
-function Post({ user, post, onDelete, onUpdate }) {
+function Post({ user, users, post, onDelete, onUpdate }) {
+
     const navigate = useNavigate();
     const [edit, setEdit] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -38,8 +44,16 @@ function Post({ user, post, onDelete, onUpdate }) {
 
 
 
-    return <div>
-        <h4> Users {post.UserId} </h4>
+    return <div className="post">
+        <div className="post__menu" >
+            <h4> {users[post.UserId]} </h4>
+            {
+                ((post.UserId === user.userId) || (user.adminAcess === true)) &&
+                <>
+                    <button className="btn" onClick={() => setEdit(true)} disabled={loading} ><EditSVG /></button>
+                    <button className="btn" onClick={handleDelete} disabled={loading} ><DeleteSVG /></button>
+                </>
+            }</div>
         {(edit === false) ?
             <DisplayPost
                 user={user}
@@ -56,16 +70,9 @@ function Post({ user, post, onDelete, onUpdate }) {
     </div>
 }
 
-function DisplayPost({ user, post, handleDelete, setEdit, loading }) {
+function DisplayPost({ post }) {
     return <>
-        {(post.text) && <div>{post.text}</div>}
         {(post.imgUrl !== null) && <img src={post.imgUrl} alt={post.imgUrl} />}
-        {
-            ((post.UserId === user.userId) || (user.adminAcess === true)) &&
-            <>
-                <button onClick={() => setEdit(true)} disabled={loading} >Editer</button>
-                <button onClick={handleDelete} disabled={loading} >Supprimer</button>
-            </>
-        }
+        {(post.text) && <div>{post.text}</div>}
     </>
 }

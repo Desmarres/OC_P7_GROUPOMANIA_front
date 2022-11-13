@@ -1,0 +1,32 @@
+.svg {
+    height: 30px;
+
+    &__logout,
+    &__login,
+    &__edit,
+    &__delete {
+        fill: $colour-secondary;
+        stroke: $colour-secondary;
+    }
+
+    &__reply {
+        fill: none;
+        stroke: $colour-secondary;
+    }
+
+    &__signup {
+        stroke: $colour-secondary;
+
+        &__file {
+            fill: none;
+        }
+
+        &__pen {
+            fill: $colour-secondary;
+        }
+    }
+
+    nav & {
+        height: 20px;
+    }
+}

@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: $colour-tertiary;
+}
+
+a {
+    text-decoration: none;
+    color: $colour-tertiary;
+    cursor: $cursor;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    width: 90%;
+    margin: auto;
+    max-width: 1200px;
+    background-color: $colour-bg;
+}
+
+img {
+    height: 150px;
+    object-fit: cover;
+}

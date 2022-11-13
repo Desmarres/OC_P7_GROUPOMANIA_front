@@ -58,6 +58,8 @@ export function usePost() {
             dispatch({ type: "ADD_POSTS", payload: res.post })
         },
         updatePost: async function (post, dataForm) {
+            console.log(dataForm.get("image").name);
+            console.log(dataForm.get('text'));
             let data = true;
             if (dataForm.get("image").name === "") {
                 dataForm = JSON.stringify({ text: dataForm.get("text") });

@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 export async function loaderAuth() {
 
     let user = {};
+    let users = [];
 
     await apiFetch("/auth/")
         .then(res => user.connected = res)
@@ -14,14 +15,18 @@ export async function loaderAuth() {
     if (user.connected === "true") {
         await apiFetch("/post/me")
             .then(res => user = { ...user, ...res });
+        await apiFetch("/auth/mail")
+            .then(res => { users = res });
     }
 
-    return user;
+
+
+    return { user, users };
 }
 
 export function Auth({ children }) {
 
-    const user = useLoaderData();
+    const { user } = useLoaderData();
 
     if (user.connected === "false") {
         return <Navigate to="/login/" replace />;

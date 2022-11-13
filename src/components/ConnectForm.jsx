@@ -52,18 +52,18 @@ function ConnectForm({ action }) {
         }
     }
 
-    return <form onSubmit={handleSubmit} >
-        <h2> {action} </h2>
+    return <form className="form__connection" onSubmit={handleSubmit} >
+        <h2 className="form__connection__title"> {action} </h2>
         {error && <Alert>{error}</Alert>}
-        <div>
+        <div className="form__connection__group">
             <label htmlFor="email">E-mail</label>
             <input type="text" name="email" id="email" required />
         </div>
-        <div>
+        <div className="form__connection__group">
             <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" required />
         </div>
-        <button disabled={loading} type="submit" > {action} </button>
+        <button className="btn form__connection__btn" disabled={loading} type="submit" > {action} </button>
     </form>
 }
 

@@ -1,0 +1,140 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #4E5166;
+}
+
+a {
+  text-decoration: none;
+  color: #4E5166;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  width: 90%;
+  margin: auto;
+  max-width: 1200px;
+  background-color: #FFFFFF;
+}
+
+img {
+  height: 150px;
+  object-fit: cover;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: #FD2D01;
+  color: #FFD7D7;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg {
+  height: 30px;
+}
+.svg__logout, .svg__login, .svg__edit, .svg__delete {
+  fill: #FFD7D7;
+  stroke: #FFD7D7;
+}
+.svg__reply {
+  fill: none;
+  stroke: #FFD7D7;
+}
+.svg__signup {
+  stroke: #FFD7D7;
+}
+.svg__signup__file {
+  fill: none;
+}
+.svg__signup__pen {
+  fill: #FFD7D7;
+}
+nav .svg {
+  height: 20px;
+}
+
+.form__connection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 300px;
+  border: 2px solid #FD2D01;
+  background-color: #FFD7D7;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.form__connection__group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form__connection__group label {
+  padding: 5px;
+}
+.form__connection__group input {
+  height: 35px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 2px solid #FD2D01;
+  background-color: #FFD7D7;
+  border-radius: 0 0 20px 20px;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  padding-left: 5%;
+}
+
+h1 {
+  font-size: 1em;
+  color: #4E5166;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 300px;
+  border: 2px solid #FD2D01;
+  background-color: #FFD7D7;
+  border-radius: 20px;
+  margin: 20px 0;
+  padding: 10px;
+}
+.post__menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.post__menu h4 {
+  flex: 1;
+  font-size: 2em;
+  text-align: center;
+}
